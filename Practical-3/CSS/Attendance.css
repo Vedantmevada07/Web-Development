@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #3fa8e1;
+}
+
+/* Header */
+header {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo */
+header img {
+    height: 200px;
+}
+
+/* Welcome Heading */
+h1 {
+    width: 280px;
+    margin: 50px auto;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+/* Form */
+form {
+    margin-top: 30px;
+}
+
+/* ID Input */
+input[type="text"] {
+    width: 250px;
+    padding: 12px;
+    font-size: 17px;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+/* Submit Button */
+input[type="submit"] {
+    padding: 10px 30px;
+    font-size: 17px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Submit Button Hover */
+input[type="submit"]:hover {
+    background-color: #f2f2f2;
+}
+
+/* Footer */
+footer {
+    margin-top: 100px;
+    padding: 15px;
+    border-top: 1px solid black;
+}

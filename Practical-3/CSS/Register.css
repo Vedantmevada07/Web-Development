@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #3fa8e1;
+}
+
+/* Header */
+header {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo */
+header img {
+    height: 200px;
+}
+
+/* Welcome Heading */
+h1 {
+    width: 280px;
+    margin: 40px auto 30px auto;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+/* Create Account Text */
+body > p:nth-of-type(1) {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Form Labels */
+body > p {
+    font-size: 18px;
+    margin: 20px auto;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="number"],
+input[type="email"] {
+    width: 250px;
+    padding: 10px;
+    margin-left: 10px;
+    border: 1px solid black;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Buttons */
+input[type="submit"] {
+    padding: 10px 30px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* Button Hover */
+input[type="submit"]:hover {
+    background-color: #f2f2f2;
+}
+
+/* Footer */
+footer {
+    margin-top: 60px;
+    padding: 15px;
+    border-top: 1px solid black;
+    font-size: 16px;
+}

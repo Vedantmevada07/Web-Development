@@ -1,0 +1,198 @@
+/* ===== Body ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #3fa8e1, #86d5ff);
+    color: #222;
+}
+
+/* ===== Header ===== */
+header {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+header img {
+    height: 180px;
+    transition: transform 0.3s;
+}
+
+header img:hover {
+    transform: scale(1.05);
+}
+
+/* ===== Horizontal Line ===== */
+hr {
+    border: none;
+    height: 2px;
+    background-color: #ffffff;
+    margin: 0;
+}
+
+/* ===== Main Heading ===== */
+h1 {
+    width: 350px;
+    margin: 40px auto 45px auto;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    background-color: #1769aa;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Paragraph ===== */
+#para1 {
+    width: 520px;
+    margin: 0 auto 50px auto;
+    padding: 15px;
+    border: 1px solid white;
+    border-radius: 12px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Cell Container ===== */
+.cell-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ===== Navigation Cells ===== */
+.cell {
+    height: 45px;
+    line-height: 45px;
+    margin: 0;
+    padding: 0 15px;
+    border: 1px solid #1769aa;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: white;
+    color: #1769aa;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* ===== Hover Effect ===== */
+.cell:hover {
+    background-color: #1769aa;
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+/* ===== Footer ===== */
+footer {
+    margin-top: 60px;
+    padding: 18px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #1769aa;
+    border-top: 3px solid white;
+}
+
+/* ===== Mobile Screen ===== */
+@media (max-width: 600px) {
+
+    h1 {
+        width: 80%;
+        font-size: 23px;
+    }
+
+    #para1 {
+        width: 80%;
+        font-size: 16px;
+    }
+
+    .cell-container {
+        width: 95%;
+    }
+
+    .cell {
+        width: 80%;
+    }
+
+}
+
+.cell-container {
+    width: 95%;
+    margin: 30px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cell {
+    min-width: 180px;
+    height: 55px;
+    line-height: 55px;
+
+    margin: 0;
+    padding: 0 25px;
+
+    background-color: #1769aa;
+    color: white;
+
+    border: none;
+    border-radius: 15px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
+
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.cell:hover {
+    background-color: #0d5a96;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+h1 {
+    width: 430px;
+    height: 55px;
+
+    margin: 30px auto 45px auto;
+    padding: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #1769aa;
+    color: white;
+
+    border: none;
+    border-radius: 15px;
+
+    font-size: 35px;
+    font-weight: bold;
+
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
+}

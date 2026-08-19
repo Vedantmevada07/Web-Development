@@ -1,0 +1,51 @@
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #3fa8e1;
+}
+
+/* Logo */
+header img {
+    height: 200px;
+}
+
+/* Body */
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Heading */
+h1 {
+    margin-bottom: 30px;
+}
+
+/* Navigation links */
+body > a {
+    display: inline-block;
+    margin: 5px;
+    padding: 12px 15px;
+    text-decoration: none;
+    background-color: lightblue;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/* Hover effect */
+body > a:hover {
+    background-color: darkblue;
+    color: white;
+}
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: lightgray;
+    text-align: center;
+    font-weight: bold;
+}
