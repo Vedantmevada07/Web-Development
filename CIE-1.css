@@ -1,0 +1,19 @@
+body{
+    background-color: #3daadd;
+    text-align: center;
+    font-size: 20px;
+}
+
+header{
+    margin-left: 20px;
+    padding-left: 20px;
+    content: normal;
+}
+
+footer{
+    text-align: left;
+}
+
+.technical club{
+    border-radius: 3px;
+}
