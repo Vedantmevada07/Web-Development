@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/Practical 4/CSS/Contact.css">
+</head>
+
+<body>
+
+<input type="checkbox" id="theme-toggle">
+
+<div class="page">
+
+    <header>
+        <img src="/Practical 4/IMAGE/StudentHub-Logo.png" alt="StudentHub Logo">
+
+        <label for="theme-toggle" class="theme-switch">
+            <span>☀</span>
+            <span>🌙</span>
+        </label>
+    </header>
+
+    <main>
+
+        <h1>For any query you can contact Us from given mail id</h1>
+
+        <section class="slider-section">
+
+            <button type="button" id="prev">❮</button>
+
+            <div class="slides">
+
+                <div class="slide active">
+                    <h3>Sports Section</h3>
+                    <p><b>Email:</b></p>
+                    <p>sport@studenthub.edu.in</p>
+                </div>
+
+                <div class="slide">
+                    <h3>Examination Section</h3>
+                    <p><b>Email:</b></p>
+                    <p>examination@studenthub.edu.in</p>
+                </div>
+
+                <div class="slide">
+                    <h3>Account Section</h3>
+                    <p><b>Email:</b></p>
+                    <p>account@studenthub.edu.in</p>
+                </div>
+
+                <div class="slide">
+                    <h3>Admission Section</h3>
+                    <p><b>Email:</b></p>
+                    <p>admission@studenthub.edu.in</p>
+                </div>
+
+                <div class="slide">
+
+                    <h3>Other Query</h3>
+
+                    <form action="contact1.html" method="get">
+
+                        <input type="text" placeholder="Enter ID" required>
+                        <br><br>
+
+                        <input type="email" placeholder="Enter Email ID" required>
+                        <br><br>
+
+                        <textarea placeholder="Enter Your Query" required></textarea>
+                        <br><br>
+
+                        <input type="submit" value="Submit">
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <button type="button" id="next">❯</button>
+
+        </section>
+
+    </main>
+
+    <footer>
+        © StudentHub_2026
+    </footer>
+
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+
+let current = 0;
+
+function showSlide(index){
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+}
+
+next.addEventListener("click", function(){
+    if(current < slides.length - 1){
+        current++;
+        showSlide(current);
+    }
+});
+
+prev.addEventListener("click", function(){
+    if(current > 0){
+        current--;
+        showSlide(current);
+    }
+});
+</script>
+
+</body>
+</html>

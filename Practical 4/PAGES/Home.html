@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentHub Home</title>
+<link rel="stylesheet" href="/Practical 4/CSS/Home.css">
+
+<script>
+if(localStorage.getItem("ui-theme")==="dark mode"){
+    document.documentElement.classList.add("dark-theme");
+}
+</script>
+
+</head>
+<body>
+
+<!-- Notification -->
+<div class="notification-banner" id="notification-banner">
+    <span>📢 Welcome to StudentHub! Check your latest updates.</span>
+    <button id="close-banner">&times;</button>
+</div>
+
+<!-- Header -->
+<header class="header">
+
+    <img src="/Practical 4/IMAGE/StudentHub-Logo.png" class="logo" alt="StudentHub Logo">
+
+    <nav class="navbar">
+
+        <a href="./Announcement.html">Announcement</a>
+        <a href="./Assignment.html">Assignment</a>
+        <a href="./Attendance.html">Attendance</a>
+        <a href="./Contact.html">Contact</a>
+        <a href="./Fees.html">Fees</a>
+        <a href="./Login.html">Login</a>
+        <a href="./Register.html">Register</a>
+        <a href="./Password.html">Password</a>
+        <a href="./Result.html">Result</a>
+        <a href="./AboutUs.html">About Us</a>
+        <a href="./Login.html">Log Out</a>
+
+    </nav>
+
+    <button id="theme-toggle" class="theme-btn">
+        🌙 Dark Mode
+    </button>
+
+</header>
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div class="hero-box">
+
+<h1>Welcome to StudentHub</h1>
+
+<p>
+Your one-stop portal for Assignments,
+Attendance, Fees, Results and other
+academic services.
+</p>
+
+</div>
+
+</section>
+
+<!-- Slider -->
+
+<section class="slider-section">
+
+<button id="prev">❮</button>
+
+<div class="slides">
+
+<div class="slide active">
+<h3>Campus Updates</h3>
+<p>New Engineering Lab has been inaugurated.</p>
+</div>
+
+<div class="slide">
+<h3>Sports Week</h3>
+<p>Registrations are now open for all events.</p>
+</div>
+
+<div class="slide">
+<h3>Library Notice</h3>
+<p>Library will remain open till midnight.</p>
+</div>
+
+</div>
+
+<button id="next">❯</button>
+
+</section>
+
+<!-- FAQ -->
+
+<section class="faq">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+
+<button class="faq-btn">
+How can I reset my password?
+<span>+</span>
+</button>
+
+<div class="faq-content">
+<p>Open the Password page and reset your password.</p>
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<button class="faq-btn">
+Where can I see attendance?
+<span>+</span>
+</button>
+
+<div class="faq-content">
+<p>Open the Attendance page.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- Notice Button -->
+
+<div class="notice">
+
+<button id="open-modal">
+View Important Notice
+</button>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<span id="close-modal">&times;</span>
+
+<h2>Examination Notice</h2>
+
+<p>
+No electronic devices are allowed during examinations.
+Carry only your Hall Ticket.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+
+© StudentHub 2026
+
+</footer>
+
+<script>
+
+const theme=document.getElementById("theme-toggle");
+
+function updateThemeButton(){
+
+theme.textContent=
+document.documentElement.classList.contains("dark-theme")
+?"☀️ Light":"🌙 Dark";
+
+}
+
+updateThemeButton();
+
+theme.onclick=()=>{
+
+document.documentElement.classList.toggle("dark-theme");
+
+localStorage.setItem(
+"ui-theme",
+document.documentElement.classList.contains("dark-theme")
+?"dark":"light"
+);
+
+updateThemeButton();
+
+};
+
+// Banner
+
+document.getElementById("close-banner").onclick=()=>{
+
+document.getElementById("notification-banner").style.display="none";
+
+};
+
+// Slider
+
+const slides=document.querySelectorAll(".slide");
+
+let index=0;
+
+function showSlide(i){
+
+slides.forEach(s=>s.classList.remove("active"));
+
+if(i>=slides.length) index=0;
+
+if(i<0) index=slides.length-1;
+
+slides[index].classList.add("active");
+
+}
+
+document.getElementById("next").onclick=()=>{
+
+index++;
+
+showSlide(index);
+
+};
+
+document.getElementById("prev").onclick=()=>{
+
+index--;
+
+showSlide(index);
+
+};
+
+// FAQ
+
+document.querySelectorAll(".faq-btn").forEach(btn=>{
+
+btn.onclick=function(){
+
+const content=this.nextElementSibling;
+
+const icon=this.querySelector("span");
+
+if(content.style.maxHeight){
+
+content.style.maxHeight=null;
+
+icon.textContent="+";
+
+}
+
+else{
+
+content.style.maxHeight=content.scrollHeight+"px";
+
+icon.textContent="−";
+
+}
+
+};
+
+});
+
+// Modal
+
+const modal=document.getElementById("modal");
+
+document.getElementById("open-modal").onclick=()=>{
+
+modal.style.display="flex";
+
+};
+
+document.getElementById("close-modal").onclick=()=>{
+
+modal.style.display="none";
+
+};
+
+window.onclick=(e)=>{
+
+if(e.target===modal)
+
+modal.style.display="none";
+
+};
+
+</script>
+
+</body>
+</html>

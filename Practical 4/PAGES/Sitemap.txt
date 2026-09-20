@@ -1,0 +1,21 @@
+StudentHub
+│
+├── Home
+├── Registeration --- [Successfully Done] --- Login
+												├── Dashboard
+												├── Profile
+												├── Attendance
+												├── Assignments
+												├── Results
+												├── fees
+												├── About Us
+												└── Contact
+├── Login --- [Successfully Done] --- Login 
+					                    ├── Dashboard
+					                    ├── Profile
+   					                    ├── Attendance
+   					                    ├── Assignments
+                       					├── Results
+   					                    ├── fees
+                    					├── About Us
+                    					└── Contact

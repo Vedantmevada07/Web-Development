@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub Login</title>
+    <link rel="stylesheet" href="/Practical 4/CSS/Login.css">
+</head>
+<body>
+
+    <!-- Notification -->
+    <div class="notification-banner">
+        <span>📢 StudentHub Portal Maintenance Tomorrow (2 AM - 4 AM)</span>
+        <button id="closeBanner">&times;</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <button id="menuBtn" class="hamburger">
+        </button>
+
+        <button id="themeToggle">🌙 Dark</button>
+    </header>
+
+    <!-- Main Horizontal Card -->
+    <div class="main-box">
+
+        <div class="left-box">
+            <img src="/Practical 4/IMAGE/StudentHub-Logo.png" alt="StudentHub Logo">
+            <h1>StudentHub</h1>
+            <p>Your College Portal</p>
+        </div>
+
+        <div class="right-box">
+
+            <h2>Welcome Back</h2>
+            <p>Login to continue</p>
+
+            <form id="loginForm" action="LoginS.html">
+
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter Username">
+                <div id="userError" class="error"></div>
+
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter Password">
+                <div id="passError" class="error"></div>
+
+                <input type="submit" value="Login">
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-container">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <button class="faq-question">Account Locked?</button>
+            <div class="faq-answer">
+                <p>Wait 15 minutes or contact your administrator.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Forgot Password?</button>
+            <div class="faq-answer">
+                <p>Use your college password reset option.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Guide Button -->
+    <div class="guide">
+        <button id="guideBtn">🔑 First Time User Guide</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+
+        <div class="modal-box">
+
+            <span id="closeModal">&times;</span>
+
+            <h2>StudentHub Guide</h2>
+
+            <p>
+                Use your college username and create a strong password.
+            </p>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © StudentHub 2026
+    </footer>
+
+<script>
+
+// Close Banner
+document.getElementById("closeBanner").onclick=function(){
+document.querySelector(".notification-banner").style.display="none";
+};
+
+// Sidebar
+document.getElementById("menuBtn").onclick=function(){
+document.getElementById("sideNav").classList.toggle("active");
+};
+
+// Theme
+document.getElementById("themeToggle").onclick=function(){
+
+document.documentElement.classList.toggle("dark");
+
+this.innerHTML=document.documentElement.classList.contains("dark")
+?"☀️ Light":"🌙 Dark";
+
+};
+
+// FAQ
+document.querySelectorAll(".faq-question").forEach(btn=>{
+
+btn.onclick=function(){
+
+let ans=this.nextElementSibling;
+
+ans.style.maxHeight=ans.style.maxHeight?null:ans.scrollHeight+"px";
+
+};
+
+});
+
+// Modal
+const modal=document.getElementById("modal");
+
+document.getElementById("guideBtn").onclick=()=>modal.style.display="flex";
+
+document.getElementById("closeModal").onclick=()=>modal.style.display="none";
+
+window.onclick=e=>{
+
+if(e.target===modal)
+modal.style.display="none";
+
+};
+
+// Login Validation
+document.getElementById("loginForm").onsubmit=function(e){
+
+let valid=true;
+
+let user=document.getElementById("username").value.trim();
+
+let pass=document.getElementById("password").value.trim();
+
+let userRegex=/^[A-Za-z0-9]{5,15}$/;
+
+let passRegex=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*!]).{8,}$/;
+
+document.getElementById("userError").innerHTML="";
+document.getElementById("passError").innerHTML="";
+
+if(!userRegex.test(user)){
+
+document.getElementById("userError").innerHTML="Enter 5-15 letters or numbers.";
+
+valid=false;
+
+}
+
+if(!passRegex.test(pass)){
+
+document.getElementById("passError").innerHTML="Password must contain uppercase, lowercase, number and special character.";
+
+valid=false;
+
+}
+
+if(!valid)
+e.preventDefault();
+
+};
+
+</script>
+
+</body>
+</html>

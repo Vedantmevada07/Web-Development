@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentHub Register</title>
+<link rel="stylesheet" href="/Practical 4/CSS/Register.css">
+</head>
+<body>
+
+<!-- Notice Bar -->
+<div class="notice-bar">
+    <span>📢 Registration for Fall Semester 2026 closes soon. Complete your profile today!</span>
+    <span id="closeNotice" class="close-notice">&times;</span>
+</div>
+
+<!-- Header -->
+<header class="header">
+    <img src="/Practical 4/IMAGE/StudentHub-Logo.png" class="logo" alt="StudentHub Logo">
+
+    <div class="header-right">
+        <button id="termsBtn" class="terms-btn">📄 Read Terms of Service</button>
+        <button id="themeBtn" class="theme-btn">🌙 Dark Mode</button>
+    </div>
+</header>
+
+<!-- Main -->
+<main class="main-content">
+
+<h1>Create Your StudentHub Account</h1>
+
+<p class="subtitle">Complete the information below to create your account.</p>
+
+<!-- Step Slider -->
+<div class="step-box">
+
+    <button id="prevStep" class="step-btn">❮</button>
+
+    <div class="step-text">
+        <h3 id="stepTitle">Step 1: Basic Information</h3>
+        <p id="stepDesc">Provide your name, contact number and school email.</p>
+    </div>
+
+    <button id="nextStep" class="step-btn">❯</button>
+
+</div>
+
+<!-- Form -->
+
+<form id="registerForm" class="register-form">
+
+<label>Full Name</label>
+<input id="name" type="text" placeholder="Enter your name">
+<small id="nameError" class="error"></small>
+
+<label>Contact Number</label>
+<input id="phone" type="tel" placeholder="Enter contact number">
+<small id="phoneError" class="error"></small>
+
+<label>Email Address</label>
+<input id="email" type="email" placeholder="Enter email address">
+<small id="emailError" class="error"></small>
+
+<button class="register-btn" type="submit">Register</button>
+
+</form>
+
+<!-- Sign In -->
+
+<div class="signin-box">
+
+<p>Already have an account?</p>
+
+<button class="signin-btn" onclick="window.location.href='Login.html'" type="button">
+Sign In
+</button>
+
+</div>
+
+<!-- FAQ -->
+
+<section class="faq-section">
+
+<h2>Registration FAQs</h2>
+
+<details>
+<summary>Can I update my email later?</summary>
+<p>Yes. Update it from your profile settings.</p>
+</details>
+
+<details>
+<summary>I didn't receive my confirmation email.</summary>
+<p>Check your spam folder or resend the email.</p>
+</details>
+
+</section>
+
+</main>
+
+<!-- Terms Modal -->
+
+<div id="termsModal" class="modal">
+
+<div class="modal-content">
+
+<span id="closeTerms" class="close">&times;</span>
+
+<h2>StudentHub Terms of Service</h2>
+
+<p>1. Use your own account only.</p>
+<p>2. Keep your password secure.</p>
+<p>3. Provide accurate registration information.</p>
+<p>4. Do not misuse StudentHub services.</p>
+<p>5. Follow your institution's policies.</p>
+
+<button id="acceptTerms" class="accept-btn">I Agree</button>
+
+</div>
+
+</div>
+
+<footer>
+
+© StudentHub_2026
+
+</footer>
+
+<script>
+
+// ---------- Dark Mode ----------
+
+const themeBtn=document.getElementById("themeBtn");
+
+themeBtn.onclick=function(){
+
+document.body.classList.toggle("dark");
+
+themeBtn.textContent=document.body.classList.contains("dark")
+?"☀️ Light Mode":"🌙 Dark Mode";
+
+};
+
+// ---------- Notice ----------
+
+document.getElementById("closeNotice").onclick=function(){
+
+document.querySelector(".notice-bar").style.display="none";
+
+};
+
+// ---------- Step Slider ----------
+
+const steps=[
+{
+title:"Step 1: Basic Information",
+desc:"Provide your name, contact number and school email."
+},
+{
+title:"Step 2: Account Security",
+desc:"Create a secure password for your account."
+},
+{
+title:"Step 3: Finish Registration",
+desc:"Review your details before submitting."
+}
+];
+
+let current=0;
+
+const title=document.getElementById("stepTitle");
+const desc=document.getElementById("stepDesc");
+
+function updateStep(){
+
+title.textContent=steps[current].title;
+desc.textContent=steps[current].desc;
+
+}
+
+document.getElementById("nextStep").onclick=function(){
+
+current=(current+1)%steps.length;
+updateStep();
+
+};
+
+document.getElementById("prevStep").onclick=function(){
+
+current=(current-1+steps.length)%steps.length;
+updateStep();
+
+};
+
+// ---------- Terms ----------
+
+const modal=document.getElementById("termsModal");
+
+document.getElementById("termsBtn").onclick=function(){
+
+modal.style.display="flex";
+
+};
+
+document.getElementById("closeTerms").onclick=function(){
+
+modal.style.display="none";
+
+};
+
+document.getElementById("acceptTerms").onclick=function(){
+
+modal.style.display="none";
+
+};
+
+window.onclick=function(e){
+
+if(e.target===modal){
+
+modal.style.display="none";
+
+}
+
+};
+
+// ---------- Regex Validation ----------
+
+document.getElementById("registerForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let ok=true;
+
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const email=document.getElementById("email").value.trim();
+
+const nameRegex=/^[A-Za-z ]{3,}$/;
+const phoneRegex=/^[6-9][0-9]{9}$/;
+const emailRegex=/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+document.getElementById("nameError").textContent="";
+document.getElementById("phoneError").textContent="";
+document.getElementById("emailError").textContent="";
+
+if(!nameRegex.test(name)){
+document.getElementById("nameError").textContent="Enter at least 3 letters.";
+ok=false;
+}
+
+if(!phoneRegex.test(phone)){
+document.getElementById("phoneError").textContent="Enter a valid 10-digit number.";
+ok=false;
+}
+
+if(!emailRegex.test(email)){
+document.getElementById("emailError").textContent="Enter a valid email.";
+ok=false;
+}
+
+if(ok){
+
+alert("Registration Successful!");
+
+window.location.href="Register1.html";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
