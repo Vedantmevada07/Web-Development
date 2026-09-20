@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcement Page</title>
+
+    <link rel="stylesheet" href="/Practical%205/CSS/Announcement.css">
+
+    <script>
+        if (localStorage.getItem("ui-theme") === "dark") {
+            document.documentElement.classList.add("dark-theme");
+        }
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <img src="/PRactical-5/IMAGE/StudentHub-Logo.png" alt="Logo">
+
+        <button id="theme-toggle" type="button">
+            ... Loading ...
+        </button>
+    </header>
+
+    <div class="announcement-box">
+        <h1>Welcome in Announcement Page</h1>
+    </div>
+
+    <div class="slider-container">
+
+        <button class="slider-btn prev-btn" id="prev">❮</button>
+
+        <div class="slider-wrapper">
+
+            <div class="slide active-slide">
+                <h3>Announcement for Hackathon</h3>
+                <p>3rd August is Institute level Hackathon in our college.</p>
+            </div>
+
+            <div class="slide">
+                <h3>Announcement for Holiday</h3>
+                <p>27th August is holiday for Rakshabandhan.</p>
+            </div>
+
+            <div class="slide">
+                <h3>Announcement for Exam</h3>
+                <p>Exam of odd Semester starts from 9th September.</p>
+            </div>
+
+            <div class="slide">
+                <h3>Announcement for Vacation</h3>
+                <p>Diwali vacation starts from 12th October to 23rd October.</p>
+            </div>
+
+        </div>
+
+        <button class="slider-btn next-btn" id="next">❯</button>
+
+    </div>
+
+    <footer>
+        @StudentHub_2026
+    </footer>
+
+    <script>
+
+        const themeBtn = document.getElementById("theme-toggle");
+
+        function syncButtonText() {
+
+            const isDark = document.documentElement.classList.contains("dark-theme");
+
+            themeBtn.textContent = isDark
+                ? "☀️ Light Mode"
+                : "🌙 Dark Mode";
+        }
+
+        syncButtonText();
+
+        themeBtn.addEventListener("click", function () {
+
+            document.documentElement.classList.toggle("dark-theme");
+
+            const isDark = document.documentElement.classList.contains("dark-theme");
+
+            localStorage.setItem("ui-theme", isDark ? "dark" : "light");
+
+            syncButtonText();
+        });
+
+        const slides = document.querySelectorAll(".slide");
+
+        let index = 0;
+
+        function showSlide(i) {
+
+            slides.forEach(slide => slide.classList.remove("active-slide"));
+
+            if (i >= slides.length) {
+                index = 0;
+            }
+            else if (i < 0) {
+                index = slides.length - 1;
+            }
+            else {
+                index = i;
+            }
+
+            slides[index].classList.add("active-slide");
+        }
+
+        document.getElementById("next").onclick = () => showSlide(index + 1);
+
+        document.getElementById("prev").onclick = () => showSlide(index - 1);
+
+    </script>
+
+</body>
+</html>

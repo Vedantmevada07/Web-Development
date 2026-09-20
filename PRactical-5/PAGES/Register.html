@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentHub Register</title>
+<link rel="stylesheet" href="/PRactical-5/CSS/Register.css">
+</head>
+<body>
+
+<div class="notice-bar">
+    <span>📢 Registration for Fall Semester 2026 closes soon. Complete your profile today!</span>
+    <span id="closeNotice" class="close-notice">&times;</span>
+</div>
+
+<header class="header">
+
+    <img src="/PRactical-5/IMAGE/StudentHub-Logo.png" class="logo" alt="StudentHub Logo">
+
+    <div class="header-right">
+
+        <button id="termsBtn" class="terms-btn" type="button">
+            📄 Read Terms of Service
+        </button>
+
+        <button id="themeBtn" class="theme-btn" type="button">
+            🌙 Dark Mode
+        </button>
+
+    </div>
+
+</header>
+
+<main class="main-content">
+
+<h1>Create Your StudentHub Account</h1>
+
+<p class="subtitle">
+Complete the information below to create your account.
+</p>
+
+<div class="step-box">
+
+    <button id="prevStep" class="step-btn" type="button">❮</button>
+
+    <div class="step-text">
+
+        <h3 id="stepTitle">Step 1: Basic Information</h3>
+
+        <p id="stepDesc">
+            Provide your name, contact number and school email.
+        </p>
+
+    </div>
+
+    <button id="nextStep" class="step-btn" type="button">❯</button>
+
+</div>
+
+<form id="registerForm" class="register-form">
+
+<label>Full Name</label>
+<input id="name" type="text" placeholder="Enter your name">
+<small id="nameError" class="error"></small>
+
+<label>Contact Number</label>
+<input id="phone" type="tel" placeholder="Enter contact number">
+<small id="phoneError" class="error"></small>
+
+<label>Email Address</label>
+<input id="email" type="email" placeholder="Enter email address">
+<small id="emailError" class="error"></small>
+
+<label>Password</label>
+<input id="password" type="password" placeholder="Create Password">
+<small id="passwordError" class="error"></small>
+
+<label>Confirm Password</label>
+<input id="confirmPassword" type="password" placeholder="Confirm Password">
+<small id="confirmPasswordError" class="error"></small>
+
+<label>Course</label>
+<select id="course">
+    <option value="">Select Course</option>
+    <option>Computer Engineering</option>
+    <option>Civil Engineering</option>
+    <option>Mechanical Engineering</option>
+    <option>Electrical Engineering</option>
+    <option>Chemical Engineering</option>
+</select>
+<small id="courseError" class="error"></small>
+
+<label>Year</label>
+<select id="year">
+    <option value="">Select Year</option>
+    <option>1st Year</option>
+    <option>2nd Year</option>
+    <option>3rd Year</option>
+    <option>4th Year</option>
+</select>
+<small id="yearError" class="error"></small>
+
+<label>Gender</label>
+
+<div class="gender-box">
+
+<label><input type="radio" name="gender" value="Male"> Male</label>
+
+<label><input type="radio" name="gender" value="Female"> Female</label>
+
+<label><input type="radio" name="gender" value="Other"> Other</label>
+
+</div>
+
+<small id="genderError" class="error"></small>
+
+<div class="terms-check">
+
+<input type="checkbox" id="terms">
+
+<label for="terms">I accept the Terms and Conditions.</label>
+
+</div>
+
+<small id="termsError" class="error"></small>
+
+<button class="register-btn" type="submit">
+Register
+</button>
+
+</form>
+
+<div class="signin-box">
+
+<p>Already have an account?</p>
+
+<button class="signin-btn" onclick="window.location.href='Login.html'" type="button">
+Sign In
+</button>
+
+</div>
+
+<section class="faq-section">
+
+<h2>Registration FAQs</h2>
+
+<details>
+
+<summary>Can I update my email later?</summary>
+
+<p>Yes. Update it from your profile settings.</p>
+
+</details>
+
+<details>
+
+<summary>I didn't receive my confirmation email.</summary>
+
+<p>Check your spam folder or resend the email.</p>
+
+</details>
+
+</section>
+
+</main>
+
+<div id="termsModal" class="modal">
+
+<div class="modal-content">
+
+<span id="closeTerms" class="close">&times;</span>
+
+<h2>StudentHub Terms of Service</h2>
+
+<p>1. Use your own account only.</p>
+<p>2. Keep your password secure.</p>
+<p>3. Provide accurate registration information.</p>
+<p>4. Do not misuse StudentHub services.</p>
+<p>5. Follow your institution's policies.</p>
+
+<button id="acceptTerms" class="accept-btn">
+I Agree
+</button>
+
+</div>
+
+</div>
+
+<footer>
+© StudentHub_2026
+</footer>
+
+<script>
+
+const themeBtn=document.getElementById("themeBtn");
+
+themeBtn.onclick=function(){
+
+document.body.classList.toggle("dark");
+
+themeBtn.textContent=document.body.classList.contains("dark")
+?"☀️ Light Mode":"🌙 Dark Mode";
+
+};
+
+document.getElementById("closeNotice").onclick=function(){
+
+document.querySelector(".notice-bar").style.display="none";
+
+};
+
+const steps=[
+{title:"Step 1: Basic Information",desc:"Provide your name, contact number and school email."},
+{title:"Step 2: Account Security",desc:"Create a secure password for your account."},
+{title:"Step 3: Finish Registration",desc:"Review your details before submitting."}
+];
+
+let current=0;
+
+function updateStep(){
+
+document.getElementById("stepTitle").textContent=steps[current].title;
+document.getElementById("stepDesc").textContent=steps[current].desc;
+
+}
+
+document.getElementById("nextStep").onclick=function(){
+
+current=(current+1)%steps.length;
+updateStep();
+
+};
+
+document.getElementById("prevStep").onclick=function(){
+
+current=(current-1+steps.length)%steps.length;
+updateStep();
+
+};
+
+const modal=document.getElementById("termsModal");
+
+document.getElementById("termsBtn").onclick=function(){
+
+modal.style.display="flex";
+
+};
+
+document.getElementById("closeTerms").onclick=function(){
+
+modal.style.display="none";
+
+};
+
+document.getElementById("acceptTerms").onclick=function(){
+
+modal.style.display="none";
+
+};
+
+window.onclick=function(e){
+
+if(e.target===modal){
+modal.style.display="none";
+}
+
+};
+
+document.getElementById("registerForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let ok=true;
+
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+const confirmPassword=document.getElementById("confirmPassword").value;
+const course=document.getElementById("course").value;
+const year=document.getElementById("year").value;
+const gender=document.querySelector('input[name="gender"]:checked');
+const terms=document.getElementById("terms").checked;
+
+const nameRegex=/^[A-Za-z ]{3,}$/;
+const phoneRegex=/^[6-9][0-9]{9}$/;
+const emailRegex=/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const passwordRegex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+document.querySelectorAll(".error").forEach(e=>e.textContent="");
+
+if(!nameRegex.test(name)){
+document.getElementById("nameError").textContent="Enter at least 3 letters.";
+ok=false;
+}
+
+if(!phoneRegex.test(phone)){
+document.getElementById("phoneError").textContent="Enter a valid 10-digit number.";
+ok=false;
+}
+
+if(!emailRegex.test(email)){
+document.getElementById("emailError").textContent="Enter a valid email.";
+ok=false;
+}
+
+if(!passwordRegex.test(password)){
+document.getElementById("passwordError").textContent="Password must contain uppercase, lowercase, number and special character.";
+ok=false;
+}
+
+if(password!==confirmPassword){
+document.getElementById("confirmPasswordError").textContent="Passwords do not match.";
+ok=false;
+}
+
+if(course===""){
+document.getElementById("courseError").textContent="Please select a course.";
+ok=false;
+}
+
+if(year===""){
+document.getElementById("yearError").textContent="Please select a year.";
+ok=false;
+}
+
+if(!gender){
+document.getElementById("genderError").textContent="Please select your gender.";
+ok=false;
+}
+
+if(!terms){
+document.getElementById("termsError").textContent="Accept Terms and Conditions.";
+ok=false;
+}
+
+if(ok){
+
+alert("Registration Successful!");
+
+window.location.href="Register1.html";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

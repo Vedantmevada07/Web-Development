@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Page</title>
+
+    <link rel="stylesheet" href="/PRactical-5/CSS/Assign1.css">
+
+    <script>
+        if(localStorage.getItem("ui-theme")==="dark"){
+            document.documentElement.classList.add("dark-theme");
+        }
+    </script>
+</head>
+
+<body>
+
+<header>
+
+    <img src="/PRactical-5/IMAGE/StudentHub-Logo.png" alt="Logo">
+
+    <button id="theme-toggle">... Loading ...</button>
+
+</header>
+
+<div class="heading-box">
+    <h1>Your Assignment is Here</h1>
+</div>
+
+<div class="slider-container">
+
+    <button class="slider-btn prev-btn" id="prev">❮</button>
+
+    <div class="slider-wrapper">
+
+        <div class="slide active-slide">
+            <h3>Maths</h3>
+            <p>Due Date: 21st July</p>
+        </div>
+
+        <div class="slide">
+            <h3>OOP</h3>
+            <p>Due Date: 12th August</p>
+        </div>
+
+        <div class="slide">
+            <h3>Web Development</h3>
+            <p>Due Date: 5th August</p>
+        </div>
+
+        <div class="slide">
+            <h3>Computer Networks</h3>
+            <p>No Assignment Available</p>
+        </div>
+
+    </div>
+
+    <button class="slider-btn next-btn" id="next">❯</button>
+
+</div>
+
+<div class="submit-box">
+
+    <h2>Submit Assignment</h2>
+
+    <form action="Assig2.html" method="get">
+
+        <input type="text" placeholder="Enter Your ID" required>
+
+        <br><br>
+
+        <input type="file" required>
+
+        <br><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+</div>
+
+<footer>
+    @StudentHub_2026
+</footer>
+
+<script>
+
+const themeBtn=document.getElementById("theme-toggle");
+
+function updateThemeButton(){
+
+    const dark=document.documentElement.classList.contains("dark-theme");
+
+    themeBtn.textContent=dark ? "☀️ Light Mode":"🌙 Dark Mode";
+}
+
+updateThemeButton();
+
+themeBtn.onclick=function(){
+
+    document.documentElement.classList.toggle("dark-theme");
+
+    localStorage.setItem(
+        "ui-theme",
+        document.documentElement.classList.contains("dark-theme")?"dark":"light"
+    );
+
+    updateThemeButton();
+};
+
+const slides=document.querySelectorAll(".slide");
+
+let index=0;
+
+function showSlide(i){
+
+    slides.forEach(slide=>slide.classList.remove("active-slide"));
+
+    if(i>=slides.length){
+        index=0;
+    }
+    else if(i<0){
+        index=slides.length-1;
+    }
+    else{
+        index=i;
+    }
+
+    slides[index].classList.add("active-slide");
+}
+
+document.getElementById("next").onclick=()=>showSlide(index+1);
+document.getElementById("prev").onclick=()=>showSlide(index-1);
+
+</script>
+
+</body>
+</html>

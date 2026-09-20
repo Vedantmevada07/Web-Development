@@ -1,0 +1,202 @@
+/* =======================
+   Complete Page
+======================= */
+
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    background:#5fcdf2;
+    color:#000;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    transition:background-color .3s,color .3s;
+}
+
+/* =======================
+   Header
+======================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 30px;
+}
+
+header img{
+    height:90px;
+}
+
+/* =======================
+   Theme Button
+======================= */
+
+#theme-toggle{
+    background:#fff;
+    color:#000;
+    border:1px solid #000;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+/* =======================
+   Welcome Box
+======================= */
+
+.announcement-box{
+    width:80%;
+    max-width:900px;
+    margin:20px auto;
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+h1{
+    border-radius:8px;
+    padding:12px;
+    margin:0;
+    font-size:28px;
+}
+
+/* =======================
+   Slider
+======================= */
+
+.slider-container{
+    width:80%;
+    max-width:900px;
+    margin:25px auto;
+    position:relative;
+    background:#fff;
+    border:2px solid #000;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+    overflow:hidden;
+}
+
+.slider-wrapper{
+    padding:35px 60px;
+}
+
+.slide{
+    display:none;
+}
+
+.slide.active-slide{
+    display:block;
+    animation:slideInFade .4s ease;
+}
+
+.slide h3{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.slide p{
+    font-size:18px;
+}
+
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,.75);
+    color:#fff;
+    border:none;
+    padding:12px 16px;
+    font-size:22px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.prev-btn{
+    left:10px;
+}
+
+.next-btn{
+    right:10px;
+}
+
+
+/* =======================
+   Footer
+======================= */
+
+footer{
+    margin-top:auto;
+    border-top:1px solid #000;
+    padding:15px;
+    font-weight:bold;
+}
+
+/* =======================
+   Animation
+======================= */
+
+@keyframes slideInFade{
+
+from{
+opacity:0;
+transform:scale(.98);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+/* =======================
+   Dark Theme
+======================= */
+
+.dark-theme body{
+    background:#121212;
+    color:#fff;
+}
+
+.dark-theme .announcement-box{
+    background:#1e1e1e;
+}
+
+.dark-theme h1{
+    border-color:#fff;
+}
+
+.dark-theme .slider-container{
+    background:#1e1e1e;
+    color:#fff;
+    border-color:#555;
+}
+
+.dark-theme table{
+    color:#fff;
+}
+
+.dark-theme th{
+    background:#222;
+    color:#fff;
+    border-color:#555;
+}
+
+.dark-theme td{
+    border-color:#555;
+}
+
+.dark-theme footer{
+    border-top-color:#555;
+}
+
+.dark-theme #theme-toggle{
+    background:#333;
+    color:#fff;
+    border-color:#555;
+}
