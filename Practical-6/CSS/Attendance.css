@@ -1,0 +1,129 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Hide Checkbox */
+#theme-toggle{
+    display:none;
+}
+
+/* Main Page */
+.page{
+    min-height:100vh;
+    background:#7acdf4;
+    color:black;
+    transition:0.4s;
+}
+
+/* Header */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 35px;
+}
+
+/* Logo */
+header img{
+    width:170px;
+    height:auto;
+}
+
+/* Dark Mode Button */
+.theme-switch{
+    width:70px;
+    height:35px;
+    background:white;
+    border:2px solid black;
+    border-radius:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 8px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+/* Main Content */
+main{
+    text-align:center;
+    margin-top:80px;
+}
+
+/* Heading */
+h1{
+    display:inline-block;
+    padding:12px 40px;
+    font-size:40px;
+    font-weight:normal;
+    margin-bottom:50px;
+}
+
+/* Input Box */
+input[type="text"]{
+    width:280px;
+    padding:12px;
+    font-size:17px;
+    border:2px solid black;
+    border-radius:8px;
+    outline:none;
+}
+
+/* Submit Button */
+input[type="submit"]{
+    padding:12px 35px;
+    font-size:17px;
+    border:none;
+    border-radius:8px;
+    background:#1565C0;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+input[type="submit"]:hover{
+    background:#0D47A1;
+}
+
+/* Footer */
+footer{
+    text-align:center;
+    margin-top:150px;
+    padding-bottom:25px;
+    font-size:18px;
+}
+
+/* Dark Mode */
+#theme-toggle:checked ~ .page{
+    background:#121212;
+    color:white;
+}
+
+#theme-toggle:checked ~ .page h1{
+    border-color:white;
+}
+
+#theme-toggle:checked ~ .page input[type="text"]{
+    background:#1E1E1E;
+    color:white;
+    border-color:white;
+}
+
+#theme-toggle:checked ~ .page .theme-switch{
+    background:#333;
+    border-color:white;
+}
+
+#theme-toggle:checked ~ .page input[type="submit"]{
+    background:#26A69A;
+}
+
+#theme-toggle:checked ~ .page input[type="submit"]:hover{
+    background:#00897B;
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "title": "Announcement for Hackathon",
+        "description": "3rd August is Institute level Hackathon in our college.",
+        "category": "Academic",
+        "date": "2026-08-03"
+    },
+    {
+        "title": "Announcement for Holiday",
+        "description": "27th August is holiday for Rakshabandhan.",
+        "category": "Event",
+        "date": "2026-08-27"
+    },
+    {
+        "title": "Announcement for Exam",
+        "description": "Exam of odd Semester starts from 9th September.",
+        "category": "Academic",
+        "date": "2026-09-09"
+    },
+    {
+        "title": "Announcement for Vacation",
+        "description": "Diwali vacation starts from 12th October to 23rd October.",
+        "category": "Event",
+        "date": "2026-10-12"
+    },
+    {
+        "title": "Sports Week Registration",
+        "description": "Register for Volleyball, Cricket, Football and Badminton.",
+        "category": "Sports",
+        "date": "2026-09-25"
+    },
+    {
+        "title": "Mid Semester Examination",
+        "description": "Mid Semester Examinations will begin from 28 September.",
+        "category": "Academic",
+        "date": "2026-09-28"
+    },
+    {
+        "title": "Library Book Return",
+        "description": "Return borrowed books before the due date to avoid late fines.",
+        "category": "Library",
+        "date": "2026-09-24"
+    },
+    {
+        "title": "Campus Placement Workshop",
+        "description": "Resume Building and Interview Skills Workshop will be held in Seminar Hall A.",
+        "category": "Placement",
+        "date": "2026-09-29"
+    },
+    {
+        "title": "Coding Contest",
+        "description": "The Programming Club is organizing a coding contest with exciting prizes.",
+        "category": "Academic",
+        "date": "2026-10-01"
+    },
+    {
+        "title": "Blood Donation Camp",
+        "description": "NSS is organizing a blood donation camp.",
+        "category": "Event",
+        "date": "2026-10-02"
+    },
+    {
+        "title": "AI Seminar",
+        "description": "Attend a seminar on Generative AI and Cybersecurity.",
+        "category": "Academic",
+        "date": "2026-10-10"
+    },
+    {
+        "title": "Football Tournament",
+        "description": "Inter-department football tournament begins next week.",
+        "category": "Sports",
+        "date": "2026-10-05"
+    }
+]

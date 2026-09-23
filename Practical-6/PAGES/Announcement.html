@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Announcement Page</title>
+
+    <link rel="stylesheet" href="/Practical-6/CSS/Announcement.css">
+
+    <!-- DARK MODE START -->
+    <script>
+
+        if (localStorage.getItem("ui-theme") === "dark") {
+
+            document.documentElement.classList.add("dark-theme");
+
+        }
+
+    </script>
+    <!-- DARK MODE END -->
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <img
+            src="/PRactical-5/IMAGE/StudentHub-Logo.png"
+            alt="StudentHub Logo"
+        >
+
+        <button
+            id="theme-toggle"
+            type="button"
+        >
+            🌙 Dark Mode
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================
+         WELCOME BOX
+    ========================== -->
+
+    <div class="announcement-box">
+
+        <h1>
+            Welcome in Announcement Page
+        </h1>
+
+    </div>
+
+
+
+    <!-- =========================
+         SEARCH / FILTER / SORT
+    ========================== -->
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search announcement..."
+        >
+
+
+        <select id="filterSelect">
+
+            <option value="All">
+                All Categories
+            </option>
+
+            <option value="Academic">
+                Academic
+            </option>
+
+            <option value="Sports">
+                Sports
+            </option>
+
+            <option value="Library">
+                Library
+            </option>
+
+            <option value="Placement">
+                Placement
+            </option>
+
+            <option value="Event">
+                Event
+            </option>
+
+        </select>
+
+
+        <select id="sortSelect">
+
+            <option value="newest">
+                Newest First
+            </option>
+
+            <option value="oldest">
+                Oldest First
+            </option>
+
+            <option value="A-Z">
+                A-Z
+            </option>
+
+            <option value="Z-A">
+                Z-A
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- =========================
+         SLIDER
+    ========================== -->
+
+    <div class="slider-container">
+
+
+        <button
+            class="slider-btn prev-btn"
+            id="prev"
+            type="button"
+        >
+            ❮
+        </button>
+
+
+        <div
+            class="slider-wrapper"
+            id="slider-wrapper"
+        >
+
+            <div class="slide active-slide">
+
+                <h3>
+                    Loading Announcements...
+                </h3>
+
+                <p>
+                    Please wait...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="slider-btn next-btn"
+            id="next"
+            type="button"
+        >
+            ❯
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         PAGINATION
+    ========================== -->
+
+    <div class="pagination">
+
+        <button
+            id="prevPage"
+            type="button"
+        >
+            Previous Page
+        </button>
+
+
+        <span id="pageNo">
+            1 / 1
+        </span>
+
+
+        <button
+            id="nextPage"
+            type="button"
+        >
+            Next Page
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        @StudentHub_2026
+
+    </footer>
+
+
+
+    <!-- =========================
+         MAIN JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        /* ==================================
+           1. DARK MODE
+        ================================== */
+
+        const themeBtn =
+            document.getElementById("theme-toggle");
+
+
+        function syncButtonText() {
+
+            const isDark =
+                document.documentElement.classList.contains(
+                    "dark-theme"
+                );
+
+
+            if (isDark) {
+
+                themeBtn.textContent =
+                    "☀️ Light Mode";
+
+            }
+
+            else {
+
+                themeBtn.textContent =
+                    "🌙 Dark Mode";
+
+            }
+
+        }
+
+
+        syncButtonText();
+
+
+        themeBtn.addEventListener(
+            "click",
+            function () {
+
+                document.documentElement.classList.toggle(
+                    "dark-theme"
+                );
+
+
+                const isDark =
+                    document.documentElement.classList.contains(
+                        "dark-theme"
+                    );
+
+
+                if (isDark) {
+
+                    localStorage.setItem(
+                        "ui-theme",
+                        "dark"
+                    );
+
+                }
+
+                else {
+
+                    localStorage.setItem(
+                        "ui-theme",
+                        "light"
+                    );
+
+                }
+
+
+                syncButtonText();
+
+            }
+        );
+
+
+
+        /* ==================================
+           2. VARIABLES
+        ================================== */
+
+        let announcements = [];
+
+        let filteredAnnouncements = [];
+
+        let currentPage = 1;
+
+        const itemsPerPage = 4;
+
+        let slides = [];
+
+        let slideIndex = 0;
+
+
+
+        /* ==================================
+           3. FETCH JSON FILE
+        ================================== */
+
+        fetch("/Practical-6/JS/Announcement.json")
+
+            .then(function(response) {
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "JSON file could not be loaded."
+                    );
+
+                }
+
+
+                return response.json();
+
+            })
+
+
+            .then(function(data) {
+
+
+                console.log(
+                    "JSON Loaded Successfully:",
+                    data
+                );
+
+
+                announcements = data;
+
+
+                filteredAnnouncements =
+                    [...announcements];
+
+
+                renderAnnouncements();
+
+            })
+
+
+            .catch(function(error) {
+
+
+                console.log(
+                    "Error loading JSON:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "slider-wrapper"
+                ).innerHTML = `
+
+                    <div class="slide active-slide">
+
+                        <h3>
+                            Error Loading Announcements
+                        </h3>
+
+                        <p>
+                            Please check your JSON file
+                            and file path.
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+
+
+        /* ==================================
+           4. DISPLAY ANNOUNCEMENTS
+        ================================== */
+
+        function renderAnnouncements() {
+
+
+            const sliderWrapper =
+                document.getElementById(
+                    "slider-wrapper"
+                );
+
+
+            sliderWrapper.innerHTML = "";
+
+
+            const startIndex =
+                (currentPage - 1) *
+                itemsPerPage;
+
+
+            const endIndex =
+                startIndex + itemsPerPage;
+
+
+            const pageData =
+                filteredAnnouncements.slice(
+                    startIndex,
+                    endIndex
+                );
+
+
+
+            /* NO RESULTS */
+
+            if (pageData.length === 0) {
+
+
+                sliderWrapper.innerHTML = `
+
+                    <div class="slide active-slide">
+
+                        <h3>
+                            No Announcement Found
+                        </h3>
+
+                        <p>
+                            Try another search or filter.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* CREATE SLIDES */
+
+            pageData.forEach(
+                function(item, index) {
+
+
+                    const slide =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    slide.classList.add(
+                        "slide"
+                    );
+
+
+                    if (index === 0) {
+
+                        slide.classList.add(
+                            "active-slide"
+                        );
+
+                    }
+
+
+
+                    slide.innerHTML = `
+
+                        <h3>
+                            ${item.title}
+                        </h3>
+
+                        <p>
+                            ${item.description}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Category:
+                            </strong>
+
+                            ${item.category}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Date:
+                            </strong>
+
+                            ${item.date}
+                        </p>
+
+                    `;
+
+
+                    sliderWrapper.appendChild(
+                        slide
+                    );
+
+                }
+            );
+
+
+
+            slides =
+                document.querySelectorAll(
+                    ".slide"
+                );
+
+
+            slideIndex = 0;
+
+
+            updatePagination();
+
+        }
+
+
+
+        /* ==================================
+           5. SEARCH
+        ================================== */
+
+        document
+            .getElementById("searchInput")
+            .addEventListener(
+                "input",
+                applyFilters
+            );
+
+
+
+        /* ==================================
+           6. FILTER
+        ================================== */
+
+        document
+            .getElementById("filterSelect")
+            .addEventListener(
+                "change",
+                applyFilters
+            );
+
+
+
+        /* ==================================
+           7. SORT
+        ================================== */
+
+        document
+            .getElementById("sortSelect")
+            .addEventListener(
+                "change",
+                applyFilters
+            );
+
+
+
+        /* ==================================
+           8. SEARCH + FILTER + SORT
+        ================================== */
+
+        function applyFilters() {
+
+
+            const searchText =
+                document.getElementById(
+                    "searchInput"
+                ).value.toLowerCase();
+
+
+            const selectedCategory =
+                document.getElementById(
+                    "filterSelect"
+                ).value;
+
+
+            const selectedSort =
+                document.getElementById(
+                    "sortSelect"
+                ).value;
+
+
+
+            /* SEARCH + FILTER */
+
+            filteredAnnouncements =
+                announcements.filter(
+                    function(item) {
+
+
+                        const title =
+                            item.title.toLowerCase();
+
+
+                        const description =
+                            item.description.toLowerCase();
+
+
+                        const searchMatch =
+                            title.includes(searchText) ||
+                            description.includes(searchText);
+
+
+                        const categoryMatch =
+                            selectedCategory === "All" ||
+                            item.category === selectedCategory;
+
+
+                        return (
+                            searchMatch &&
+                            categoryMatch
+                        );
+
+                    }
+                );
+
+
+
+            /* SORTING */
+
+
+            if (selectedSort === "A-Z") {
+
+
+                filteredAnnouncements.sort(
+                    function(a, b) {
+
+                        return a.title.localeCompare(
+                            b.title
+                        );
+
+                    }
+                );
+
+            }
+
+
+            else if (selectedSort === "Z-A") {
+
+
+                filteredAnnouncements.sort(
+                    function(a, b) {
+
+                        return b.title.localeCompare(
+                            a.title
+                        );
+
+                    }
+                );
+
+            }
+
+
+            else if (selectedSort === "newest") {
+
+
+                filteredAnnouncements.sort(
+                    function(a, b) {
+
+                        return (
+                            new Date(b.date) -
+                            new Date(a.date)
+                        );
+
+                    }
+                );
+
+            }
+
+
+            else if (selectedSort === "oldest") {
+
+
+                filteredAnnouncements.sort(
+                    function(a, b) {
+
+                        return (
+                            new Date(a.date) -
+                            new Date(b.date)
+                        );
+
+                    }
+                );
+
+            }
+
+
+
+            currentPage = 1;
+
+
+            renderAnnouncements();
+
+        }
+
+
+
+        /* ==================================
+           9. SLIDER
+        ================================== */
+
+        function showSlide(number) {
+
+
+            if (slides.length === 0) {
+
+                return;
+
+            }
+
+
+
+            slides.forEach(
+                function(slide) {
+
+                    slide.classList.remove(
+                        "active-slide"
+                    );
+
+                }
+            );
+
+
+
+            if (number >= slides.length) {
+
+                slideIndex = 0;
+
+            }
+
+
+            else if (number < 0) {
+
+                slideIndex =
+                    slides.length - 1;
+
+            }
+
+
+            else {
+
+                slideIndex = number;
+
+            }
+
+
+
+            slides[slideIndex]
+                .classList.add(
+                    "active-slide"
+                );
+
+        }
+
+
+
+        /* NEXT SLIDE */
+
+        document
+            .getElementById("next")
+            .addEventListener(
+                "click",
+                function() {
+
+                    showSlide(
+                        slideIndex + 1
+                    );
+
+                }
+            );
+
+
+
+        /* PREVIOUS SLIDE */
+
+        document
+            .getElementById("prev")
+            .addEventListener(
+                "click",
+                function() {
+
+                    showSlide(
+                        slideIndex - 1
+                    );
+
+                }
+            );
+
+
+
+        /* ==================================
+           10. PAGINATION
+        ================================== */
+
+        function updatePagination() {
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredAnnouncements.length /
+                    itemsPerPage
+                );
+
+
+            document.getElementById(
+                "pageNo"
+            ).textContent =
+
+                currentPage +
+                " / " +
+                (totalPages || 1);
+
+        }
+
+
+
+        /* NEXT PAGE */
+
+        document
+            .getElementById("nextPage")
+            .addEventListener(
+                "click",
+                function() {
+
+
+                    const totalPages =
+                        Math.ceil(
+                            filteredAnnouncements.length /
+                            itemsPerPage
+                        );
+
+
+                    if (
+                        currentPage <
+                        totalPages
+                    ) {
+
+
+                        currentPage++;
+
+
+                        renderAnnouncements();
+
+                    }
+
+                }
+            );
+
+
+
+        /* PREVIOUS PAGE */
+
+        document
+            .getElementById("prevPage")
+            .addEventListener(
+                "click",
+                function() {
+
+
+                    if (currentPage > 1) {
+
+
+                        currentPage--;
+
+
+                        renderAnnouncements();
+
+                    }
+
+                }
+            );
+
+    </script>
+
+
+</body>
+
+</html>
